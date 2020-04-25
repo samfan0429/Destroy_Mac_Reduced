@@ -50,19 +50,22 @@ export default new Phaser.Class({
         if (this.cursors.up.isDown)
         {
             player.setVelocityY(-160);
-            console.log('----->going down');
+            console.log('----->going up');
         }
         if (this.cursors.down.isDown)
         {
             player.setVelocityY(160);
+            console.log('----->going down');
         }
         if(this.cursors.right.isDown)
         {
             player.setVelocityX(160);
+            console.log('----->going right');
         }
         if (this.cursors.left.isDown)
         {
             player.setVelocityX(-160);
+            console.log('----->going left');
         }
 
     },
