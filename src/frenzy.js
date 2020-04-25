@@ -12,6 +12,11 @@ export default new Phaser.Class({
         Phaser.Scene.call(this, { key: 'frenzy' });
     },
 
+    init: function(data){
+        this.stealthKeys=data.keys;
+        this.cursors=this.input.keyboard.createCursorKeys();
+    },
+
     preload: function ()
     {
         this.load.image('imac', 'assets/images/imac.jpg'); // from https://www.pexels.com/photo/photo-of-imac-near-macbook-1029757/
@@ -23,16 +28,18 @@ export default new Phaser.Class({
         var background = this.add.image(400, 300, 'imac');
 
         //Keyboard set
-        cursors=this.input.keyboard.createCursorKeys();
+        this.cursors=this.input.keyboard.createCursorKeys();
 
     },
 
     update: function()
     {
-        if (cursors.space.isDown) {
+        if (this.cursors.space.isDown) {
             console.log('From frenzy to stealth');
-            cursors.space.isDown=false;
+            //Without this following line, the system thinks the space is still down for stealth scene.
+            this.cursors.space.isDown=false;
             this.scene.resume('stealth');
+            this.stealthKeys.enabled=true;
             this.scene.stop();
         }
     }
