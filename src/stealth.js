@@ -71,6 +71,9 @@ export default new Phaser.Class({
     },
 
     breakComp: function(player,target){
+        //Without the following 5 lines, either the system thinks the key that was last pressed
+        //is still pressed or the velocity is not zero.
+        this.input.keyboard.enabled=false;
         this.cursors.down.isDown=false;
         this.cursors.up.isDown=false;
         this.cursors.right.isDown=false;
@@ -78,7 +81,8 @@ export default new Phaser.Class({
 
         player.setVelocityY(0);
         player.setVelocityX(0); 
-        this.scene.launch('frenzy');
+        
+        this.scene.launch('frenzy',{keys:this.input.keyboard});
         this.scene.pause();
         console.log('from stealth to frenzy');  
         target.disableBody(true, true);
